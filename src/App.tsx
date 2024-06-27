@@ -12,56 +12,56 @@ import ProfileContainer from "./pages/Profile/ProfileContainer";
 import AuthGuard from "./components/AuthGurd";
 
 const theme = createTheme({
-	typography: {
-		fontFamily: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(","),
-	},
-	palette: {
-		primary: teal,
-		secondary: blueGrey,
-	},
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+  },
+  palette: {
+    primary: teal,
+    secondary: blueGrey,
+  },
 });
 
 function App() {
-	return (
-		<>
-			<ThemeProvider theme={theme}>
-				<BrowserRouter>
-					<AuthGuard>
-						<Header />
-						<Routes>
-							<Route path="/DAOMatcher/" element={<Body />} />
-							<Route path="/DAOMatcher/login/" element={<Login />} />
-							<Route path="/DAOMatcher/signup/" element={<Signup />} />
-							<Route path="/DAOMatcher/history/" element={<History />} />
-							<Route
-								path="/DAOMatcher/profile/"
-								element={<ProfileContainer />}
-							/>
-							<Route
-								path="/DAOMatcher/verifyEmail/"
-								element={<Verification />}
-							/>
-							<Route
-								path="/DAOMatcher/api/auth/confirm/:token"
-								element={<Confirm />}
-							/>
-						</Routes>
-					</AuthGuard>
-				</BrowserRouter>
-			</ThemeProvider>
-		</>
-	);
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <AuthGuard>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Body />} />
+              <Route path="/login/" element={<Login />} />
+              <Route path="/signup/" element={<Signup />} />
+              <Route path="/history/" element={<History />} />
+              <Route
+                path="/profile/"
+                element={<ProfileContainer />}
+              />
+              <Route
+                path="/verifyEmail/"
+                element={<Verification />}
+              />
+              <Route
+                path="/api/auth/confirm/:token"
+                element={<Confirm />}
+              />
+            </Routes>
+          </AuthGuard>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default App;
