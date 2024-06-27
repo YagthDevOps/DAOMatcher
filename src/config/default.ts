@@ -9,9 +9,9 @@ export const CONSTANTS = {
     PUT_PROFILE: "/api/user", // use it with /userid
   },
   PRIVATE_ROUTES: [
-    "/DAOMatcher",
-    "/DAOMatcher/history",
-    "/DAOMatcher/profile",
+    "/",
+    "/history",
+    "/profile",
   ],
 };
 export const socket = io(BASE_URL, { autoConnect: false, transports: ["websocket"] })

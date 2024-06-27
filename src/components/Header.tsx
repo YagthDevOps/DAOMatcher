@@ -19,161 +19,161 @@ import { setIsLoggedIn } from "@/pages/Home/homeSlice";
 
 
 function Header() {
-	const { pathname } = useLocation();
-	const showNavbar = CONSTANTS.PRIVATE_ROUTES.includes(pathname);
-	const user = useSelector((state: RootState) => selectUser(state));
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	
+  const { pathname } = useLocation();
+  const showNavbar = CONSTANTS.PRIVATE_ROUTES.includes(pathname);
+  const user = useSelector((state: RootState) => selectUser(state));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-	const settings = [
-		{ name: "Profile", link: "/DAOMatcher/profile" },
-		{ name: "History", link: "/DAOMatcher/history" },
-	];
 
-	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-		null,
-	);
+  const settings = [
+    { name: "Profile", link: "/profile" },
+    { name: "History", link: "/history" },
+  ];
 
-	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorElUser(event.currentTarget);
-	};
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null,
+  );
 
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-	const handleLogOut = () => {
-		localStorage.clear();
-		dispatch(clearUser());
-		dispatch(setIsLoggedIn(false));
-		navigate("/DAOMatcher/login");
-	};
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-	if (!showNavbar) {
-		return <></>;
-	}
+  const handleLogOut = () => {
+    localStorage.clear();
+    dispatch(clearUser());
+    dispatch(setIsLoggedIn(false));
+    navigate("/login");
+  };
 
-	return (
-		<AppBar position="static" sx={{ background: "white", boxShadow: "2" }}>
-			<Container maxWidth="xl">
-				<Toolbar
-					disableGutters
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "space-between",
-					}}
-				>
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="/"
-						sx={{
-							mr: 2,
-							display: { xs: "none", md: "flex" },
-							fontFamily: "roboto",
-							fontWeight: 800,
-							letterSpacing: ".05rem",
-							color: "black",
-							textDecoration: "none",
-						}}
-					>
-						DAOMacther
-					</Typography>
+  if (!showNavbar) {
+    return <></>;
+  }
 
-					{/*
+  return (
+    <AppBar position="static" sx={{ background: "white", boxShadow: "2" }}>
+      <Container maxWidth="xl">
+        <Toolbar
+          disableGutters
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "roboto",
+              fontWeight: 800,
+              letterSpacing: ".05rem",
+              color: "black",
+              textDecoration: "none",
+            }}
+          >
+            DAOMacther
+          </Typography>
+
+          {/*
 					 *mobile scrren
 					 */}
-					<Typography
-						variant="h6"
-						noWrap
-						component="a"
-						href="/"
-						sx={{
-							mr: 2,
-							display: { xs: "flex", md: "none" },
-							flexGrow: 1,
-							fontFamily: "roboto",
-							fontWeight: 600,
-							letterSpacing: ".05rem",
-							color: "black",
-							textDecoration: "none",
-						}}
-					>
-						DAOMacther
-					</Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "roboto",
+              fontWeight: 600,
+              letterSpacing: ".05rem",
+              color: "black",
+              textDecoration: "none",
+            }}
+          >
+            DAOMacther
+          </Typography>
 
-					<Box sx={{ flexGrow: 0 }}>
-						<Tooltip title="Open settings">
-							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								{/*
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                {/*
 								 *TODO:MAKE THE image url /hello DYNAMIC
 								 */}
-								<Avatar
-									alt="Profile image"
-									sx={{ width: "100%" }}
-									src={`${CONSTANTS.URL.GET_RANDOM_IMAGE}/${user.display_name}`}
-								/>
-							</IconButton>
-						</Tooltip>
-						<Menu
-							sx={{ mt: "45px" }}
-							id="menu-appbar"
-							anchorEl={anchorElUser}
-							anchorOrigin={{
-								vertical: "top",
-								horizontal: "right",
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "right",
-							}}
-							open={Boolean(anchorElUser)}
-							onClose={handleCloseUserMenu}
-						>
-							{settings.map((url) => (
-								<MenuItem key={url.link} onClick={handleCloseUserMenu}>
-									<Typography
-										component="a"
-										sx={{
-											color: "black",
-											textDecoration: "none",
-											minWidth: "100px",
-										}}
-										textAlign="center"
-										href={url.link}
-									>
-										{url.name}
-									</Typography>
-								</MenuItem>
-							))}
+                <Avatar
+                  alt="Profile image"
+                  sx={{ width: "100%" }}
+                  src={`${CONSTANTS.URL.GET_RANDOM_IMAGE}/${user.display_name}`}
+                />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((url) => (
+                <MenuItem key={url.link} onClick={handleCloseUserMenu}>
+                  <Typography
+                    component="a"
+                    sx={{
+                      color: "black",
+                      textDecoration: "none",
+                      minWidth: "100px",
+                    }}
+                    textAlign="center"
+                    href={url.link}
+                  >
+                    {url.name}
+                  </Typography>
+                </MenuItem>
+              ))}
 
-							{/*
+              {/*
 							 *logout
 							 */}
 
-							<MenuItem onClick={handleLogOut}>
-								<Typography
-									component="a"
-									sx={{
-										color: "black",
-										textDecoration: "none",
-										minWidth: "100px",
-									}}
-									textAlign="center"
-								>
-									Logout
-								</Typography>
-							</MenuItem>
-						</Menu>
-					</Box>
-				</Toolbar>
-			</Container>
-		</AppBar>
-	);
+              <MenuItem onClick={handleLogOut}>
+                <Typography
+                  component="a"
+                  sx={{
+                    color: "black",
+                    textDecoration: "none",
+                    minWidth: "100px",
+                  }}
+                  textAlign="center"
+                >
+                  Logout
+                </Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
 
 export default Header;

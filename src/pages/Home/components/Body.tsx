@@ -122,7 +122,7 @@ function Body() {
   }, [resubmit, searchParam]);
   if (!isLoggedIn) {
     dispatch(clearUser());
-    return <Navigate to="/DAOMatcher/login" />;
+    return <Navigate to="/login" />;
   }
 
   return (

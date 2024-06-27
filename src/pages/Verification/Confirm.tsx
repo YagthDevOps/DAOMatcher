@@ -43,7 +43,7 @@ function Confirm() {
 
   useEffect(() => {
     if (confirmationStatus === "success") {
-      navigate("/DAOMatcher");
+      navigate("/");
     }
   }, [confirmationStatus, navigate]);
 

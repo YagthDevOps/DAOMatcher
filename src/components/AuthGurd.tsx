@@ -5,19 +5,19 @@ import { RootState } from "@/redux/store";
 import { selectToken } from "@/redux/userSlice";
 
 interface AuthGuardProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
-	const { pathname } = useLocation();
-	const isPrivateRoute = CONSTANTS.PRIVATE_ROUTES.includes(pathname);
-	const token = useSelector((state: RootState) => selectToken(state));
+  const { pathname } = useLocation();
+  const isPrivateRoute = CONSTANTS.PRIVATE_ROUTES.includes(pathname);
+  const token = useSelector((state: RootState) => selectToken(state));
 
-	if (isPrivateRoute && !token) {
-		return <Navigate to="/DAOMatcher/login" replace />;
-	}
+  if (isPrivateRoute && !token) {
+    return <Navigate to="/login" replace />;
+  }
 
-	return children;
+  return children;
 };
 
 export default AuthGuard;

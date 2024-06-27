@@ -16,12 +16,12 @@ export default function Verification() {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(120);
-  const [resendDisabled, setResendDisabled] = useState(true);  
+  const [resendDisabled, setResendDisabled] = useState(true);
   const [alert, setAlert] = useState<{ message: string; severity: Severity } | null>(null);
 
   useEffect(() => {
     if (!token) {
-      navigate('/DAOMatcher/login');
+      navigate('/login');
     }
     return () => {
       clearInterval(countdown);
@@ -48,8 +48,9 @@ export default function Verification() {
       try {
         const { data: successData }: AxiosResponse<AuthResponse> = await axios.get(
           `${BASE_URL}/api/auth/confirm/resend`,
-          { withCredentials: true, headers: { Authorization: `Bearer ${token}` }
-           }
+          {
+            withCredentials: true, headers: { Authorization: `Bearer ${token}` }
+          }
         );
 
         if (successData.success) {
@@ -78,14 +79,14 @@ export default function Verification() {
 
       setTimeout(() => {
         setResendDisabled(false);
-      },120000);
+      }, 120000);
     }
   };
 
 
   return (
     <div style={{ display: "flex", height: "100vh", alignItems: "center", justifyContent: "center" }}>
-      <Container maxWidth="sm" style={{  display: "flex", flexDirection:"column"}}>
+      <Container maxWidth="sm" style={{ display: "flex", flexDirection: "column" }}>
         <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
           <MailOutline style={{ fontSize: 50 }} />
         </Box>
@@ -95,10 +96,10 @@ export default function Verification() {
         <Typography variant="body1" align="center" gutterBottom>
           We've sent an email to <strong>{user.email}</strong> to verify your email address.
         </Typography>
-        <br/>
+        <br />
         <Typography variant="body2" gutterBottom align="center">
-          If you didn't receive the verification email, click the button below 
-          { countdown > 0 && ` after ${countdown} seconds`}
+          If you didn't receive the verification email, click the button below
+          {countdown > 0 && ` after ${countdown} seconds`}
         </Typography>
         <Button variant="contained" onClick={handleResendClick} disabled={resendDisabled}>
           Resend The Verification Email
